@@ -30,6 +30,6 @@ public class Permutation {
 
 	public static void main(String[] args){
 		Permutation object = new Permutation();
-		System.out.print(object.solution("ab".toLowerCase(), "bc"));
+		System.out.print(object.solution("ab", "bc"));
 	}
 }
