@@ -7,29 +7,23 @@ import java.util.Arrays;
  */
 public class RotateMatrix {
 	public int[][] solution(int[][] matrix){
-		rotation(matrix, 0, matrix.length);
+		rotation(matrix, 0);
 
 		return matrix;
 	}
 	
-	private void rotation(int[][] matrix, int start, int end){
-		if (start >= end) return;
-		int tmp = 0;
-		for (int i = start; i < end - 1; i++){
-			tmp = matrix[i][end - 1];
-			matrix[i][end - 1] = matrix[start][i];
-            matrix[start][i] = tmp;
-
-			tmp = matrix[end - 1][end - i - 1];
-            matrix[end - 1][end - i - 1] = matrix[start][i];
-            matrix[start][i] = tmp;
-
-			tmp = matrix[end - i - 1][start];
-			matrix[end - i - 1][start] = matrix[start][i];
-            matrix[start][i] = tmp;
+	private void rotation(int[][] matrix, int start){
+		if (start >= matrix.length - start) return;
+		int tmp;
+		for (int i = start; i < matrix.length - start - 1; i++){
+			tmp = matrix[start][i];
+			matrix[start][i] = matrix[matrix.length - i - 1][start];
+            matrix[matrix.length - i - 1][start] = matrix[matrix.length - start - 1][matrix.length - i - 1];
+            matrix[matrix.length - start - 1][matrix.length - i - 1] = matrix[i][matrix.length - start - 1];
+            matrix[i][matrix.length - start - 1] = tmp;
 		}
 		
-		rotation(matrix, start + 1, end - 1);
+		rotation(matrix, start + 1);
 	}
 
 	public static void main(String[] args){
